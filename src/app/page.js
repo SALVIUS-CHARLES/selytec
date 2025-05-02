@@ -228,7 +228,7 @@ export default function Home() {
             <form onSubmit={handleSubmit} style={styles.form}>
               <input type="text" name="username" placeholder="Enter your name" value={formData.username} onChange={handleChange} required style={styles.input} />
               <input type="tel" name="phone" placeholder="Enter phone number" value={formData.phone} onChange={handleChange} required style={styles.input} />
-              <button type="submit" style={styles.submitButton}>Get Your HDD Now</button>
+              <button type="submit" style={styles.submitButton}>Confirm to Get Your HDD Now</button>
             </form>
           </section>
         )}
