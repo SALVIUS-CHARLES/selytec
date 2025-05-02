@@ -1,14 +1,16 @@
 'use client';
 
 import React, { useState } from 'react';
-import Image from 'next/image';
 
 export default function Home() {
   const [formData, setFormData] = useState({ username: '', phone: '' });
   const [activeSection, setActiveSection] = useState('description');
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
   };
 
   const handleSubmit = (e) => {
@@ -19,13 +21,6 @@ export default function Home() {
 
   const handleNavClick = (sectionId) => {
     setActiveSection(sectionId);
-    const element = document.getElementById(sectionId);
-    if (element) {
-      const navbar = document.querySelector('nav');
-      const navbarHeight = navbar ? navbar.offsetHeight : 0;
-      const offsetPosition = element.offsetTop - navbarHeight - 20;
-      window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
-    }
   };
 
   const styles = {
@@ -35,7 +30,7 @@ export default function Home() {
       padding: '0',
       margin: '0',
       minHeight: '100vh',
-      backgroundImage: 'linear-gradient(135deg, rgb(5, 5, 5) 0%, rgb(10, 10, 10) 100%)',
+      backgroundImage: 'linear-gradient(135deg,rgb(5, 5, 5) 0%,rgb(10, 10, 10) 100%)',
     },
     navbar: {
       display: 'flex',
@@ -133,6 +128,13 @@ export default function Home() {
       margin: '30px 0',
       width: '100%',
     },
+    image: {
+      width: '100%',
+      maxWidth: '500px',
+      height: 'auto',
+      borderRadius: '12px',
+      boxShadow: '0 8px 20px rgba(0, 0, 0, 0.15)',
+    },
     formSection: {
       backgroundColor: '#fff',
       maxWidth: '800px',
@@ -192,45 +194,44 @@ export default function Home() {
       <nav style={styles.navbar}>
         <div style={styles.logo}>SELLY Technology Store</div>
         <div style={styles.navLinks}>
-          <a href="#description" onClick={() => handleNavClick('description')} style={activeSection === 'description' ? styles.activeNavButton : styles.navButton}>Home</a>
-          <a href="#storage" onClick={() => handleNavClick('storage')} style={activeSection === 'storage' ? styles.activeNavButton : styles.navButton}>Features</a>
-          <a href="#contact" onClick={() => handleNavClick('contact')} style={activeSection === 'contact' ? styles.activeNavButton : styles.navButton}>Contact</a>
+          <button onClick={() => handleNavClick('description')} style={activeSection === 'description' ? styles.activeNavButton : styles.navButton}>Home</button>
+          <button onClick={() => handleNavClick('storage')} style={activeSection === 'storage' ? styles.activeNavButton : styles.navButton}>Features</button>
+          <button onClick={() => handleNavClick('contact')} style={activeSection === 'contact' ? styles.activeNavButton : styles.navButton}>Contact</button>
         </div>
       </nav>
 
       <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 20px' }}>
-        <section id="description" style={styles.section}>
-          <h1 style={styles.title}>Smart Storage and Strong Protection HDD</h1>
-          <p style={styles.text}>Get peace of mind with our 500GB external hard drive. It&#39;s built for speed, safety, and everyday use. Store your photos, videos, and business files with confidence. Easy to carry, simple to use — the smart choice for work and life.</p>
-          <div style={styles.imageContainer}>
-            <Image src="/hdd.jpg" alt="HDD External Case and USB" width={500} height={300} style={styles.image} />
-          </div>
-        </section>
+        {activeSection === 'description' && (
+          <section id="description" style={styles.section}>
+            <h1 style={styles.title}>Smart Storage and Strong Protection HDD</h1>
+            <p style={styles.text}>Get peace of mind with our 500GB external hard drive. It's built for speed, safety, and everyday use. Store your photos, videos, and business files with confidence. Easy to carry, simple to use — the smart choice for work and life.</p>
+            <div style={styles.imageContainer}><img src="/hdd.jpg" alt="HDD External Case and USB" style={styles.image} /></div>
+          </section>
+        )}
 
-        <section id="storage" style={styles.section}>
-          <h2 style={styles.subtitle}>Maximize Your Storage, Maximize Your Potential</h2>
-          <p style={styles.text}>Say goodbye to limited storage. Our 500GB hard drive gives your business or personal data room to grow. Save videos, documents, backups, and more — all in one secure place. Perfect for entrepreneurs, content creators, and professionals who need fast, reliable storage.</p>
-          <div style={styles.imageContainer}>
-            <Image src="/storage.jpg" alt="500GB HDD Storage" width={500} height={300} style={styles.image} />
-          </div>
-          <h2 style={styles.subtitle}>Special Offer</h2>
-          <div style={styles.priceTag}>Buy one for TSh 35,000 or get two for just TSh 30,000 each</div>
-          <p style={styles.text}>Save TSh 10,000 with our bundle deal!</p>
-        </section>
+        {activeSection === 'storage' && (
+          <section id="storage" style={styles.section}>
+            <h2 style={styles.subtitle}>Maximize Your Storage, Maximize Your Potential</h2>
+            <p style={styles.text}>Say goodbye to limited storage. Our 500GB hard drive gives your business or personal data room to grow. Save videos, documents, backups, and more — all in one secure place. Perfect for entrepreneurs, content creators, and professionals who need fast, reliable storage.</p>
+            <div style={styles.imageContainer}><img src="/storage.jpg" alt="500GB HDD Storage" style={styles.image} /></div>
+            <h2 style={styles.subtitle}>Special Offer</h2>
+            <div style={styles.priceTag}>Buy one for TSh 35,000 or get two for just TSh 30,000 each</div>
+            <p style={styles.text}>Save TSh 10,000 with our bundle deal!</p>
+            <h2 style={styles.subtitle}>Powered by SELLY Technology</h2>
+            <p style={styles.text}>SELLY ensures faster, safer, and energy-efficient data management. Enjoy encryption and power-saving features in one device.</p>
+          </section>
+        )}
 
-        <section style={styles.section}>
-          <h2 style={styles.subtitle}>Powered by SELLY Technology</h2>
-          <p style={styles.text}>SELLY ensures faster, safer, and energy-efficient data management. Enjoy encryption and power-saving features in one device.</p>
-        </section>
-
-        <section id="contact" style={styles.formSection}>
-          <h2 style={styles.subtitle}>Are you Interested? Share Your Info</h2>
-          <form onSubmit={handleSubmit} style={styles.form}>
-            <input type="text" name="username" placeholder="Enter your name" value={formData.username} onChange={handleChange} required style={styles.input} />
-            <input type="tel" name="phone" placeholder="Enter phone number" value={formData.phone} onChange={handleChange} required style={styles.input} />
-            <button type="submit" style={styles.submitButton}>Get Your HDD Now</button>
-          </form>
-        </section>
+        {activeSection === 'contact' && (
+          <section id="contact" style={styles.formSection}>
+            <h2 style={styles.subtitle}>Are you Interested? Share Your Info</h2>
+            <form onSubmit={handleSubmit} style={styles.form}>
+              <input type="text" name="username" placeholder="Enter your name" value={formData.username} onChange={handleChange} required style={styles.input} />
+              <input type="tel" name="phone" placeholder="Enter phone number" value={formData.phone} onChange={handleChange} required style={styles.input} />
+              <button type="submit" style={styles.submitButton}>Get Your HDD Now</button>
+            </form>
+          </section>
+        )}
       </div>
     </div>
   );
