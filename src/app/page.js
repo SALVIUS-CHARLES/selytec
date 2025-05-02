@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import Image from 'next/image';
 
 export default function Home() {
   const [formData, setFormData] = useState({ username: '', phone: '' });
@@ -127,13 +128,8 @@ export default function Home() {
       alignItems: 'center',
       margin: '30px 0',
       width: '100%',
-    },
-    image: {
-      width: '100%',
-      maxWidth: '500px',
-      height: 'auto',
-      borderRadius: '12px',
-      boxShadow: '0 8px 20px rgba(0, 0, 0, 0.15)',
+      position: 'relative',
+      height: '300px',
     },
     formSection: {
       backgroundColor: '#fff',
@@ -204,8 +200,15 @@ export default function Home() {
         {activeSection === 'description' && (
           <section id="description" style={styles.section}>
             <h1 style={styles.title}>Smart Storage and Strong Protection HDD</h1>
-            <p style={styles.text}>Get peace of mind with our 500GB external hard drive. It's built for speed, safety, and everyday use. Store your photos, videos, and business files with confidence. Easy to carry, simple to use — the smart choice for work and life.</p>
-            <div style={styles.imageContainer}><img src="/hdd.jpg" alt="HDD External Case and USB" style={styles.image} /></div>
+            <p style={styles.text}>Get peace of mind with our 500GB external hard drive. It&apos;s built for speed, safety, and everyday use. Store your photos, videos, and business files with confidence. Easy to carry, simple to use — the smart choice for work and life.</p>
+            <div style={styles.imageContainer}>
+              <Image 
+                src="/hdd.jpg" 
+                alt="HDD External Case and USB" 
+                fill
+                style={{ objectFit: 'contain', borderRadius: '12px' }}
+              />
+            </div>
           </section>
         )}
 
@@ -213,7 +216,14 @@ export default function Home() {
           <section id="storage" style={styles.section}>
             <h2 style={styles.subtitle}>Maximize Your Storage, Maximize Your Potential</h2>
             <p style={styles.text}>Say goodbye to limited storage. Our 500GB hard drive gives your business or personal data room to grow. Save videos, documents, backups, and more — all in one secure place. Perfect for entrepreneurs, content creators, and professionals who need fast, reliable storage.</p>
-            <div style={styles.imageContainer}><img src="/storage.jpg" alt="500GB HDD Storage" style={styles.image} /></div>
+            <div style={styles.imageContainer}>
+              <Image 
+                src="/storage.jpg" 
+                alt="500GB HDD Storage" 
+                fill
+                style={{ objectFit: 'contain', borderRadius: '12px' }}
+              />
+            </div>
             <h2 style={styles.subtitle}>Special Offer</h2>
             <div style={styles.priceTag}>Buy one for TSh 35,000 or get two for just TSh 30,000 each</div>
             <p style={styles.text}>Save TSh 10,000 with our bundle deal!</p>
